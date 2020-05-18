@@ -47,6 +47,7 @@ interface Props {
   containerStyle?: any
   wrapperStyle?: any
   closeStyle?: any
+  linkStyle?:any
   animationType?: 'none' | 'fade' | 'slide'
   areaTouchText: {
     top?: number, 
@@ -213,6 +214,7 @@ export default class LinkedInModal extends React.Component<Props, State> {
     renderClose: PropTypes.func,
     containerStyle: ViewPropTypes.style,
     wrapperStyle: ViewPropTypes.style,
+    linkStyle: ViewPropTypes.style,
     closeStyle: ViewPropTypes.style,
     animationType: PropTypes.string,
     shouldGetAccessToken: PropTypes.bool,
@@ -226,6 +228,7 @@ export default class LinkedInModal extends React.Component<Props, State> {
     containerStyle: StyleSheet.create({}),
     wrapperStyle: StyleSheet.create({}),
     closeStyle: StyleSheet.create({}),
+    linkStyle: StyleSheet.create({}),
     shouldGetAccessToken: true,
   }
   state: State = {
@@ -308,7 +311,7 @@ export default class LinkedInModal extends React.Component<Props, State> {
     })
 
   renderButton = () => {
-    const { renderButton, linkText, areaTouchText, isDisabled = false } = this.props
+    const { renderButton, linkText, areaTouchText, isDisabled = false, linkStyle } = this.props
     if (renderButton) {
       return(
         <TouchableOpacity  
@@ -329,7 +332,7 @@ export default class LinkedInModal extends React.Component<Props, State> {
         hitSlop={areaTouchText}
         disabled={isDisabled}
       >
-        <Text>{linkText}</Text>
+        <Text style={linkStyle?linkStyle:null}>{linkText}</Text>
       </TouchableOpacity>
     )
   }
